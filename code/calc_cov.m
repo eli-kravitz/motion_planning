@@ -1,0 +1,13 @@
+function P = calc_cov(dt,Q,P_old,x,L)
+
+dfdx = [0 0 -x(4)*sin(x(3)) cos(x(3)) 0;...
+        0 0 x(4)*cos(x(3)) sin(x(3)) 0;...
+        0 0 0 (1/L)*tan(x(5)) (x(4)/L)*sec(x(5))^2;...
+        0 0 0 0 0;...
+        0 0 0 0 0];
+    
+F_tilde = eye(5)+dt*dfdx;
+P = F_tilde*P_old*transpose(F_tilde)+Q;
+
+end
+
